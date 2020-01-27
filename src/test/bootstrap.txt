@@ -1,0 +1,80 @@
+for (j = 0; j < 5; j++) {
+  while(foo) { // multiline while block
+    bar()
+  }
+  while(1000 m === 1 km) bar() // one line while block
+  if(foo) { // multiline while block
+    bar()
+  } else if(bar) {
+    nombo
+  }
+}
+
+{ // just a plain scope block
+  // Some invalid JavaScript syntax (also valid Math.js syntax)
+  G = 6.67408e-11 m^3 kg^-1 s^-2  // Gravitational constant
+  mbody = 5.972e24 kg             // Mass of Earth
+  dvdt(r, v, m, phi, gamma) = -mu / r^2 * sin(gamma) + T / m
+}
+
+
+let ndsolve = (f, x0, dt, tmax) => {
+   const n = f.size()[0]; // Number of variables
+   const nsteps = math.divide(tmax, dt); // Number of time steps
+   for (let i = 0; i < nsteps; i++) {
+      // Compute derivatives
+   }
+
+   return math.matrix(result);
+}
+// Multiline Math.js syntax
+result_stage1 = ndsolve(
+  [drdt, dvdt, dmdt, dphidt, dgammadt], 
+  [r0, v0, m0, phi0, gamma_0], 
+  dt, 
+  tfinal
+)
+
+function plot(x, y) {
+  let data_x = x.toArray();
+  let data_y = y.toArray();
+  new Chart(document.getElementById("canvas1"), {
+  });
+}
+
+let rendom = function(x, y) {
+  let data_x = x.toArray();
+  let data_y = y.toArray();
+  new Chart(document.getElementById("canvas1"), {
+  });
+}
+
+G = 6.67408e-11 m^3 kg^-1 s^-2  // Gravitational constant
+mbody = 5.972e24 kg             // Mass of Earth
+mu = G * mbody
+dt = 1.0 s                      // Simulation timestep
+tfinal = 1500 s                 // Simulation duration
+T = 1710000 lbf * 0.9           // Engine thrust
+g0 = 9.80665 m/s^2              // Standard gravity: used for calculating prop consumption (dmdt)
+isp = 290 s                     // Specific impulse
+   
+r0 = 6378.1370 km               // Equatorial radius of Earth
+v0 = 8 m/s                      // Initial velocity (must be non-zero because ODE is ill-conditioned)
+m0 = 1207920 lbm + 30000 lbm    // Initial mass of rocket and fuel
+phi0 = 0 deg                    // Initial orbital reference angle
+gamma_0 = 89.99883 deg          // Initial pitch angle (90 deg is vertical)
+
+// Define the equations of motion. It is important to maintain the same argument order for each of these functions.
+drdt(r, v, m, phi, gamma) = v sin(gamma)
+dvdt(r, v, m, phi, gamma) = -mu / r^2 * sin(gamma) + T / m
+dmdt(r, v, m, phi, gamma) = -T/g0/isp
+dphidt(r, v, m, phi, gamma) = v/r * cos(gamma) * rad
+dgammadt(r, v, m, phi, gamma) = (1/r * (v - mu / (r v)) * cos(gamma)) * rad
+
+// Again, remember to maintain the same variable order in the call to ndsolve.
+result_stage1 = ndsolve([drdt, dvdt, dmdt, dphidt, dgammadt], [r0, v0, m0, phi0, gamma_0], dt, tfinal)
+
+// Extract the useful information from the results so it can be plotted
+x = (result_stage1[:,4] - phi0) * r0 / rad / km
+y = (result_stage1[:,1] - r0) / km
+plot(x, y)

@@ -1,0 +1,21 @@
+for (j = 0; j < 5; j++) {
+  while(foo) { // multiline while block
+    bar()
+  }
+  while(1000 m === 1 km) bar() // one line while block
+}
+
+{ // just a plain scope block
+  // Some invalid JavaScript syntax (also valid Math.js syntax)
+  G = 6.67408e-11 m^3 kg^-1 s^-2  // Gravitational constant
+  mbody = 5.972e24 kg             // Mass of Earth
+  dvdt(r, v, m, phi, gamma) = -mu / r^2 * sin(gamma) + T / m
+}
+
+// Multiline Math.js syntax
+result_stage1 = ndsolve(
+  [drdt, dvdt, dmdt, dphidt, dgammadt], 
+  [r0, v0, m0, phi0, gamma_0], 
+  dt, 
+  tfinal
+)
