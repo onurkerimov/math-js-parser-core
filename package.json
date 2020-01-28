@@ -1,21 +1,24 @@
 {
-  "name": "acorn-loose",
+  "name": "math-parser",
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "dev": "webpack-dev-server --env dev --mode none",
+    "prod": "webpack --env prod --mode production"
   },
   "dependencies": {
     "acorn-loose": "7.0.0",
     "acorn-walk": "7.0.0",
+    "babel-loader": "^8.0.6",
     "foldmaker": "^1.0.1",
-    "mathjs": "6.5.0"
+    "mathjs": "6.5.0",
+    "raw-loader": "^4.0.0",
+    "webpack": "^4.41.5",
+    "webpack-dev-server": "^3.10.1"
   },
   "devDependencies": {
-    "@babel/core": "7.2.0",
-    "parcel-bundler": "^1.6.1"
+    "@babel/core": "7.2.0"
   },
   "keywords": []
 }

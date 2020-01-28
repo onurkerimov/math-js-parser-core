@@ -77,21 +77,3 @@ math.import(
   },
   { override: true }
 )
-
-
-_start()
-for (_(`j = 0`); _(`j < 5`); _(`j++`)) {
-  _start()
-  _start()
-  while (_(`foo`)) {
-    _start() /* multiline while block */
-    _(`bar()`)
-    _end()
-  }
-  _end()
-  _start()
-  while (_(`1000 m === 1 km`)) _(`bar()`)
-  _end() /* one line while block */
-  _end()
-}
-_end()

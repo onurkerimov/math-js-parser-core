@@ -5,6 +5,10 @@ for (j = 0; j < 5; j++) {
   while(1000 m === 1 km) bar() // one line while block
 }
 
+map([1,2,4,5,6], elem => {
+  console.log(elem)
+})
+
 { // just a plain scope block
   // Some invalid JavaScript syntax (also valid Math.js syntax)
   G = 6.67408e-11 m^3 kg^-1 s^-2  // Gravitational constant

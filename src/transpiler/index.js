@@ -1,16 +1,15 @@
+import functionSkipper from './functionSkipper'
 import expressionWrapper from './expressionWrapper'
-import * as acornLoose from 'acorn-loose'
 import blockWrapper from './blockWrapper'
-import { applyPatches } from './utils'
+import lineMapper from './lineMapper'
 
 export default string => {
-  let wrappedExpressions = expressionWrapper(string)
-  let acornNodes = acornLoose.parse(wrappedExpressions)
-  let patches = blockWrapper(acornNodes)
-  let outputString = applyPatches(wrappedExpressions, patches)
+  let skippedFunctions = functionSkipper(string)
+  let wrappedExpressions = expressionWrapper(skippedFunctions)
+  let wrappedBlocks = blockWrapper(wrappedExpressions)
+  let outputString = lineMapper(wrappedBlocks)
   return outputString  
 }
-
 
 // let conditions = [
 //   node => {
