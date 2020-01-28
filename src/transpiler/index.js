@@ -1,14 +1,14 @@
-import functionSkipper from './functionSkipper'
+import functionExcluder from './functionExcluder'
 import expressionWrapper from './expressionWrapper'
 import blockWrapper from './blockWrapper'
 import lineMapper from './lineMapper'
 
 export default string => {
-  let skippedFunctions = functionSkipper(string)
-  let wrappedExpressions = expressionWrapper(skippedFunctions)
+  let excludedFunctions = functionExcluder(string)
+  let wrappedExpressions = expressionWrapper(excludedFunctions)
   let wrappedBlocks = blockWrapper(wrappedExpressions)
   let outputString = lineMapper(wrappedBlocks)
-  return outputString  
+  return outputString
 }
 
 // let conditions = [

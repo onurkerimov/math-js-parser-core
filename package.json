@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "dev": "webpack-dev-server --env dev --mode none",
-    "prod": "webpack --env prod --mode production"
+    "dev": "webpack-dev-server --mode development",
+    "prod": "webpack --mode production"
   },
   "dependencies": {
     "acorn-loose": "7.0.0",
