@@ -25,10 +25,8 @@ const generateHash = scope => {
 
 class Parser {
   constructor() {
-    this.scope = {}
-    this.inherited = {}
+    this.scope = {mathScope: {}, addresses: {}}
     this.parentScopes = []
-    this.parentInherited = []
     this.currentLine = 1
   }
 
@@ -36,18 +34,10 @@ class Parser {
     // Clone the scope and move there
     this.parentScopes.push(this.scope)
     this.scope = { ...this.scope }
-    this.parentInherited.push(this.inherited)
-    this.inherited = { ...this.inherited }
   }
 
   end() {
-    // Return to previously declared scope
-    let overrides = {}
-    //Object.keys(this.inherited).forEach(key => {
-    //  overrides[key] = this.scope[key]
-    //})
-    this.scope = { ...this.parentScopes.pop(), ...overrides }
-    this.inherited = this.parentInherited.pop()
+    this.scope = { ...this.parentScopes.pop() }
   }
 
   line(number) {
@@ -73,7 +63,7 @@ class Parser {
     let node = math.parse(string)
     // Checks if we are also modifying one of parent block's variables
     this._assignmentWorker(node)
-    node.compile().evaluate(this.scope)
+    node.compile().evaluate(this.scope.mathScope)
     //} catch (err) {
     //  this._error(err.message + ' at line ' + this.currentLine)
     //}
@@ -82,7 +72,9 @@ class Parser {
   _assignmentWorker(node) {
     if (node.type === 'AssignmentNode') {
       let name = node.object.name
-      if (this.inherited[name]) {
+      if (this.scope.addresses[name]) {
+        // If the address is set before,
+        console.log(name + ' is set before')
       } else {
         let parent = this.parentScopes[this.parentScopes.length - 1]
         if (parent[name]) this.inherited[name] = true
@@ -117,7 +109,6 @@ const _ = parser.evaluate.bind(parser)
 _start();
 _`mahmut = 25`
       _start();
-
               _start();
               _`mahmut = 1`
               _`ali = 5`

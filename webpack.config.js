@@ -3,7 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    'main.js': './src/index.js'
+    'main.js': './src/index.js', 
+    'interpreter.js': './src/interpreter/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -27,12 +28,24 @@ module.exports = {
         use: [{
           loader: 'raw-loader',
         }],
-      }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
+      },
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: true,
+      template: './src/index.html',
+      inject: false
     })
   ]
 };
